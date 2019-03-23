@@ -10,9 +10,23 @@ function getProjects() {
   return db('projects')
 }
 function getProject(id) {
-  return db('projects')
-    .where({ id })
-    .first()
+  return db
+    .select(
+      'project_name',
+      'project_description',
+      'finished',
+      'action_description',
+      'notes',
+      'complete'
+    )
+    .from('projects_actions')
+    .innerJoin('projects', function() {
+      this.on('project_id', '=', 'projects.id')
+    })
+    .innerJoin('actions', function() {
+      this.on('action_id', '=', 'actions.id')
+    })
+    .where({ 'projects_actions.project_id': id })
 }
 function addProject(body) {
   return db('projects')
