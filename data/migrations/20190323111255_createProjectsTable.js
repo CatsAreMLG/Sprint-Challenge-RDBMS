@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
       .text('description', 256)
       .notNullable()
       .unique()
-    tbl.boolean('complete')
+    tbl.boolean('finished')
   })
 }
 
