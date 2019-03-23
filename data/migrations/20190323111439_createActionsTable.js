@@ -1,18 +1,18 @@
 exports.up = function(knex, Promise) {
-  knex.schema.createTable('projects', tbl => {
+  knex.schema.createTable('actions', tbl => {
     tbl.increments()
     tbl
-      .string('table_name', 128)
+      .text('actions_description')
       .notNullable()
       .unique()
     tbl
-      .text('projects_description')
+      .string('notes', 128)
       .notNullable()
       .unique()
-    tbl.boolean('finished')
+    tbl.boolean('complete')
   })
 }
 
 exports.down = function(knex, Promise) {
-  knex.schema.dropTableIfExists('projects')
+  knex.schema.dropTableIfExists('actions')
 }
