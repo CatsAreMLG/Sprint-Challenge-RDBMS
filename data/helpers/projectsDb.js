@@ -3,7 +3,9 @@ const db = require('../../dbConfig')
 module.exports = {
   getProjects,
   getProject,
-  addProject
+  getProjectSolo,
+  addProject,
+  updateProject
 }
 
 function getProjects() {
@@ -28,8 +30,21 @@ function getProject(id) {
     })
     .where({ 'projects_actions.project_id': id })
 }
+function getProjectSolo(id) {
+  return db('projects')
+    .where({ id })
+    .first()
+}
 function addProject(body) {
   return db('projects')
     .insert(body)
     .then(ids => ids[0])
+}
+function updateProject(id, changes) {
+  return db('projects')
+    .where({ id })
+    .update(changes)
+    .then(_ => {
+      return getProject(id)
+    })
 }

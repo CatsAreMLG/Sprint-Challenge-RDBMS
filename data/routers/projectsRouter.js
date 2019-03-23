@@ -52,5 +52,27 @@ router.post('/', async (req, res) => {
       .status(500)
       .json({ error: 'Please provide a project name and description' })
 })
+router.put('/:id', async (req, res) => {
+  const { id } = req.params
+  const { body } = req
+  if (body && body.project_name && body.project_description)
+    try {
+      const update = await Projects.updateProject(id, body)
+      if (update) {
+        if (update.length > 0) res.status(200).json(update)
+        else {
+          const project = await Projects.getProjectSolo(id)
+          res.status(200).json(project)
+        }
+      } else res.status(404).json({ error: 'Project not found' })
+    } catch (error) {
+      res.status(500).json({ error })
+    }
+  else
+    res.status(500).json({
+      error:
+        'Please provide a change (project name and/or description and/or finished)'
+    })
+})
 
 module.exports = router
