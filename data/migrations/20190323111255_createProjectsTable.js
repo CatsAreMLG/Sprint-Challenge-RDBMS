@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
       .notNullable()
       .unique()
     tbl
-      .text('projects_description')
+      .text('project_description')
       .notNullable()
       .unique()
     tbl.boolean('finished')
