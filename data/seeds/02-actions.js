@@ -8,22 +8,22 @@ exports.seed = function(knex, Promise) {
         {
           action_description: 'clean room',
           notes: 'wipe down surfaces, sweep floor, etc.',
-          completed: false
+          complete: false
         },
         {
           action_description: 'get produce',
           notes: 'veggies',
-          completed: false
+          complete: false
         },
         {
           action_description: 'get meat',
           notes: 'meat, chicken, fish, etc.',
-          completed: false
+          complete: false
         },
         {
           action_description: 'pay phone bill',
           notes: 'pay phone bill: $50',
-          completed: false
+          complete: false
         }
       ])
     })
